@@ -12,3 +12,5 @@ loan amount
 number of years for the loan
 initial capital
 three banks, each will return an interest rate option, along with all the payment schemes once the user has inputted all of their information as written above.
+
+excel_file: (using pandas for exporting) loan_information.xxsl
