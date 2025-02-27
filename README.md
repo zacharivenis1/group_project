@@ -14,3 +14,11 @@ initial capital
 three banks, each will return an interest rate option, along with all the payment schemes once the user has inputted all of their information as written above.
 
 excel_file: (using pandas for exporting) loan_information.xxsl
+
+Assigned tasks:
+kristian: 
+zach: 
+dom: 
+alexander: 
+fredrik: 
+angelo: 
