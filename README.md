@@ -16,9 +16,6 @@ three banks, each will return an interest rate option, along with all the paymen
 excel_file: (using pandas for exporting) loan_information.xxsl
 
 Assigned tasks:
-kristian: 
-zach: 
-dom: 
-alexander: 
-fredrik: 
-angelo: 
+zach and fredrik: Pandas export into Excel 
+alexander and kristian: input information for calculator 
+Dom and Angelo: make the calculator using the other files
