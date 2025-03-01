@@ -55,3 +55,89 @@ def check_financial_sustainability(monthly_payment, annual_income):
     """Checks if the monthly installment is sustainable based on income."""
     monthly_income = annual_income / 12
     return "✅ Sustainable" if monthly_payment < 0.3 * monthly_income else "⚠️ Unhealthy Financing"
+
+def check_bank_eligibility(user_data, banks):
+    """Determines which banks the user qualifies for and calculates loan terms."""
+    loan_amount = user_data["loan_amount"]
+    annual_income = user_data["annual_income"]
+    capital = user_data["capital"]
+    credit_score = user_data["credit_score"]
+
+    eligible_banks = {}
+    alternative_banks = {}
+
+    for bank, details in banks.items():
+        max_loan = details["max_loan_to_income"] * annual_income
+        required_down_payment = details["down_payment"] * loan_amount
+        max_possible_down_payment = details["down_payment"] * max_loan
+
+        if credit_score >= details["min_credit_score"]:
+            if loan_amount <= max_loan and capital >= required_down_payment:
+                # User qualifies for the requested loan amount
+                eligible_banks[bank] = {
+                    "base_interest_rate": details["base_interest_rate"],
+                    "max_loan_allowed": max_loan,
+                    "required_down_payment": required_down_payment,
+                    "loan_options": {}
+                }
+
+                # Calculate monthly payments for different loan terms
+                for term in [15, 25, 30]:  # Loan periods in years
+                    monthly_payment = calculate_monthly_payment(loan_amount, details["base_interest_rate"], term)
+                    sustainability = check_financial_sustainability(monthly_payment, annual_income)
+
+                    eligible_banks[bank]["loan_options"][term] = {
+                        "monthly_payment": monthly_payment,
+                        "sustainability": sustainability
+                    }
+
+            elif capital >= max_possible_down_payment:
+                # User cannot get the full requested loan but can borrow a smaller amount
+                alternative_banks[bank] = {
+                    "base_interest_rate": details["base_interest_rate"],
+                    "max_loan_allowed": max_loan,
+                    "required_down_payment": max_possible_down_payment,
+                    "loan_options": {}
+                }
+
+                # Calculate monthly payments for the maximum possible loan
+                for term in [15, 25, 30]:  # Loan periods in years
+                    monthly_payment = calculate_monthly_payment(max_loan, details["base_interest_rate"], term)
+                    sustainability = check_financial_sustainability(monthly_payment, annual_income)
+
+                    alternative_banks[bank]["loan_options"][term] = {
+                        "monthly_payment": monthly_payment,
+                        "sustainability": sustainability
+                    }
+
+    return eligible_banks, alternative_banks
+
+
+# User Input
+user_data = get_mortgage_inputs()
+eligible_banks, alternative_banks = check_bank_eligibility(user_data, banks)
+
+# Display Results
+if eligible_banks:
+    print("\n🏦 You qualify for loans from the following banks:")
+    for bank, details in eligible_banks.items():
+        print(f"\n{bank}:")
+        print(f"   - Interest Rate: {details['base_interest_rate']}%")
+        print(f"   - Max Loan Allowed: ${details['max_loan_allowed']:,.2f}")
+        print(f"   - Required Down Payment: ${details['required_down_payment']:,.2f}")
+        print("   - Loan Options:")
+        for term, option in details["loan_options"].items():
+            print(f"     🔹 {term} years: ${option['monthly_payment']:,.2f}/month → {option['sustainability']}")
+elif alternative_banks:
+    print("\n⚠️ You do not qualify for your requested loan amount, but here are the maximum amounts you can borrow:")
+    for bank, details in alternative_banks.items():
+        print(f"\n{bank}:")
+        print(f"   - Interest Rate: {details['base_interest_rate']}%")
+        print(f"   - Maximum Loan Allowed: ${details['max_loan_allowed']:,.2f}")
+        print(f"   - Required Down Payment: ${details['required_down_payment']:,.2f}")
+        print("   - Loan Options:")
+        for term, option in details["loan_options"].items():
+            print(f"     🔹 {term} years: ${option['monthly_payment']:,.2f}/month → {option['sustainability']}")
+else:
+    print("\n❌ Unfortunately, you do not qualify for any loan at this time.")
+
