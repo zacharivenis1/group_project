@@ -14,7 +14,7 @@ def get_mortgage_inputs():
                 raise ValueError("Loan amount must be greater than 0.")
             break
         except ValueError as e:
-            print(f"❌ Invalid input: {e}. Please enter a valid amount.")
+            print("Please enter a valid loan amount.")
 
     while True:
         try:
@@ -23,7 +23,7 @@ def get_mortgage_inputs():
                 raise ValueError("Income must be greater than 0.")
             break
         except ValueError as e:
-            print(f"❌ Invalid input: {e}. Please enter a valid income.")
+            print("Please enter a valid income.")
 
     while True:
         try:
@@ -32,7 +32,7 @@ def get_mortgage_inputs():
                 raise ValueError("Capital cannot be negative.")
             break
         except ValueError as e:
-            print(f"❌ Invalid input: {e}. Please enter a valid amount.")
+            print("Please enter a valid amount for capital.")
 
     while True:
         try:
@@ -41,7 +41,7 @@ def get_mortgage_inputs():
                 raise ValueError("Credit score must be between 300 and 850.")
             break
         except ValueError as e:
-            print(f"❌ Invalid input: {e}. Please enter a valid credit score.")
+            print("Please enter a valid credit score.")
 
     return {
         "loan_amount": loan_amount,
