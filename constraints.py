@@ -168,32 +168,3 @@ def check_bank_eligibility(user_data, banks):
                     }
 
     return eligible_banks, alternative_banks
-
-
-# User Input
-user_data = get_mortgage_inputs()
-eligible_banks, alternative_banks = check_bank_eligibility(user_data, banks)
-
-# Display Results
-if eligible_banks:
-    print("\n🏦 You qualify for loans from the following banks:")
-    for bank, details in eligible_banks.items():
-        print(f"\n{bank}:")
-        print(f"   - Interest Rate: {details['base_interest_rate']}%")
-        print(f"   - Max Loan Allowed: ${details['max_loan_allowed']:,.2f}")
-        print(f"   - Required Down Payment: ${details['required_down_payment']:,.2f}")
-        print("   - Loan Options:")
-        for term, option in details["loan_options"].items():
-            print(f"     🔹 {term} years: ${option['monthly_payment']:,.2f}/month → {option['sustainability']}")
-elif alternative_banks:
-    print("\n⚠️ You do not qualify for your requested loan amount, but here are the maximum amounts you can borrow:")
-    for bank, details in alternative_banks.items():
-        print(f"\n{bank}:")
-        print(f"   - Interest Rate: {details['base_interest_rate']}%")
-        print(f"   - Maximum Loan Allowed: ${details['max_loan_allowed']:,.2f}")
-        print(f"   - Required Down Payment: ${details['required_down_payment']:,.2f}")
-        print("   - Loan Options:")
-        for term, option in details["loan_options"].items():
-            print(f"     🔹 {term} years: ${option['monthly_payment']:,.2f}/month → {option['sustainability']}")
-else:
-    print("\n❌ Unfortunately, you do not qualify for any loan at this time.")
