@@ -135,13 +135,4 @@ down_payment: The required down payment as a percentage of the loan amount.
 
 ## Example:
 
-python
-Copy
-banks = {
-    "Bank Name": {
-        "base_interest_rate": 5.0,
-        "max_loan_to_income": 4.5,
-        "min_credit_score": 700,
-        "down_payment": 0.10
-    }
-}
+Insert image example
