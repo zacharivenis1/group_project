@@ -108,7 +108,7 @@ Contains the main logic for user interaction, data saving, and eligibility analy
 
 Saves user data and bank constraints to Excel files.
 
-## constraints.py:
+## [constraints.py:](https://github.com/zacharivenis1/group_project/blob/main/constraints.py):
 
 Defines bank constraints (interest rates, loan-to-income ratios, credit score requirements, etc.).
 
