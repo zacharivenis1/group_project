@@ -1,18 +1,18 @@
 # Mortgage Calculator Application
 The Mortgage Calculator Application is a Python-based tool designed to help users determine their eligibility for home loans from various banks. It analyzes user inputs such as loan amount, annual income, capital, and credit score to provide detailed loan options and eligibility criteria. The application also saves user data and bank constraints to Excel files for easy reference.
 
-Features
-User Input Collection: Collects user inputs for loan amount, annual income, capital, and credit score with error handling.
+# Features
+## User Input Collection: Collects user inputs for loan amount, annual income, capital, and credit score with error handling.
 
-Bank Eligibility Analysis: Checks user eligibility for loans from multiple banks based on predefined constraints.
+## Bank Eligibility Analysis: Checks user eligibility for loans from multiple banks based on predefined constraints.
 
-Loan Options: Displays detailed loan options, including monthly payments and financial sustainability for 15, 25, and 30-year terms.
+## Loan Options: Displays detailed loan options, including monthly payments and financial sustainability for 15, 25, and 30-year terms.
 
-Excel Integration: Saves user data and bank constraints to Excel files for record-keeping.
+## Excel Integration: Saves user data and bank constraints to Excel files for record-keeping.
 
-Interactive Interface: Allows users to retry calculations with different inputs.
+## Interactive Interface: Allows users to retry calculations with different inputs.
 
-Prerequisites
+# Prerequisites
 Before running the application, ensure you have the following installed:
 
 Python 3.x: The application is built using Python. Download and install Python from python.org.
@@ -25,12 +25,13 @@ pandas: For handling Excel files.
 
 openpyxl: For Excel file operations.
 
-You can install the required libraries using the following command:
+# You can install the required libraries using the following command:
 
 bash
 Copy
 pip install pandas openpyxl
-How to Use
+
+## How to Use
 Step 1: Clone or Download the Project
 Clone this repository or download the project files (back_end.py and constraints.py) to your local machine.
 
@@ -70,7 +71,7 @@ Bank constraints are saved to constraints_data.xlsx.
 Step 7: Retry or Exit
 After viewing the results, you can choose to retry with different values or exit the application.
 
-Example Interaction
+# Example Interaction
 Here’s an example of how the application works:
 
 Copy
@@ -96,19 +97,19 @@ What is your credit score? (300-850): 750
 File Structure
 The project consists of two main files:
 
-back_end.py:
+# back_end.py:
 
 Contains the main logic for user interaction, data saving, and eligibility analysis.
 
 Saves user data and bank constraints to Excel files.
 
-constraints.py:
+# constraints.py:
 
 Defines bank constraints (interest rates, loan-to-income ratios, credit score requirements, etc.).
 
 Contains functions for calculating monthly payments and checking financial sustainability.
 
-Customization
+# Customization
 Adding or Modifying Banks
 You can add or modify banks in the constraints.py file. Each bank is defined with the following parameters:
 
@@ -120,7 +121,7 @@ min_credit_score: The minimum credit score required.
 
 down_payment: The required down payment as a percentage of the loan amount.
 
-Example:
+## Example:
 
 python
 Copy
