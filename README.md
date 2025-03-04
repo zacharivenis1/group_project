@@ -87,9 +87,9 @@ What is your annual income? (USD): 60000
 How much capital do you have? (USD): 30000
 What is your credit score? (300-850): 750
 
-✅ You qualify for loans from the following banks:
+You qualify for loans from the following banks:
 
-🏦 Nordea:
+Nordea:
    - Interest Rate: 6.1%
    - Max Loan Allowed: $240,000.00
    - Required Down Payment: $20,000.00
