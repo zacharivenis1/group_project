@@ -1,6 +1,7 @@
 # Mortgage Calculator Application
 The Mortgage Calculator Application is a Python-based tool designed to help users determine their eligibility for home loans from various banks. It analyzes user inputs such as loan amount, annual income, capital, and credit score to provide detailed loan options and eligibility criteria. The application also saves user data and bank constraints to Excel files for easy reference.
 
+
 ## Features
 ### User Input Collection: 
 Collects user inputs for loan amount, annual income, capital, and credit score with error handling.
@@ -17,6 +18,7 @@ Saves user data and bank constraints to Excel files for record-keeping.
 ### Interactive Interface: 
 Allows users to retry calculations with different inputs.
 
+
 ## Prerequisites
 ### Before running the application, ensure you have the following installed:
 
@@ -30,11 +32,13 @@ pandas: For handling Excel files.
 
 openpyxl: For Excel file operations.
 
+
 ## You can install the required libraries using the following command:
 
 bash
 Copy
 pip install pandas openpyxl
+
 
 ## How to Use
 ### Step 1: Clone or Download the Project
@@ -76,6 +80,7 @@ Bank constraints are saved to constraints_data.xlsx.
 ### Step 7: Retry or Exit
 After viewing the results, you can choose to retry with different values or exit the application.
 
+
 ## Example Interaction
 Here’s an example of how the application works:
 
@@ -102,17 +107,20 @@ What is your credit score? (300-850): 750
 File Structure
 The project consists of two main files:
 
+
 ## [back_end.py](https://github.com/zacharivenis1/group_project/blob/main/back_end.py):
 
 Contains the main logic for user interaction, data saving, and eligibility analysis.
 
 Saves user data and bank constraints to Excel files.
 
+
 ## [constraints.py](https://github.com/zacharivenis1/group_project/blob/main/constraints.py):
 
 Defines bank constraints (interest rates, loan-to-income ratios, credit score requirements, etc.).
 
 Contains functions for calculating monthly payments and checking financial sustainability.
+
 
 ## Customization
 **Adding or Modifying Banks**
@@ -126,6 +134,7 @@ max_loan_to_income: The maximum loan amount as a multiple of the user's annual i
 min_credit_score: The minimum credit score required.
 
 down_payment: The required down payment as a percentage of the loan amount.
+
 
 ## Example:
 
