@@ -53,7 +53,7 @@ Right-click anywhere in the editor and select Run 'back_end'.
 The application will start, and you will be prompted to input your mortgage details in the PyCharm Run console.
 
 ### Step 4: Input Your Details
-## The application will ask for the following inputs:
+### The application will ask for the following inputs:
 
 Loan Amount (USD): The amount you wish to borrow.
 
