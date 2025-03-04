@@ -1,4 +1,4 @@
-Mortgage Calculator Application
+# Mortgage Calculator Application
 The Mortgage Calculator Application is a Python-based tool designed to help users determine their eligibility for home loans from various banks. It analyzes user inputs such as loan amount, annual income, capital, and credit score to provide detailed loan options and eligibility criteria. The application also saves user data and bank constraints to Excel files for easy reference.
 
 Features
