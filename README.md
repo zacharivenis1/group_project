@@ -140,4 +140,4 @@ down_payment: The required down payment as a percentage of the loan amount.
 
 ## Example:
 
-Insert image example
+![Screenshot 2025-03-04 141756](https://github.com/user-attachments/assets/7de5babc-e01b-4dfa-8537-79dd31b4ea81)
