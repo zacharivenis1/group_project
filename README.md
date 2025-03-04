@@ -50,7 +50,12 @@ pip install pandas openpyxl
 ### Step 2: Open the Project in PyCharm
 - Open PyCharm and load the project directory containing the two Python files.
 - Ensure the required libraries (pandas and openpyxl) are installed in your Python environment.
+  If they're not installed, you can download them using pip:
+  pip install pandas openpyxl
 
+  import pandas as pd
+  import openpyxl  # This import ensures openpyxl is available for Excel file operations.
+  
 ### Step 3: Run the Application
 - Open the back_end.py file in PyCharm.
 - Right-click anywhere in the editor and select Run 'back_end'.
