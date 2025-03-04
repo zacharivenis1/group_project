@@ -78,7 +78,6 @@ Credit Score (300-850): Your credit score.
 - If you do not qualify, the application will explain why, detailing the shortfalls in loan amount, credit score, or down payment for each bank.
 
 ### Step 6: Save Data
-- User inputs are saved to user_information.xlsx.
 - Bank constraints are saved to constraints_data.xlsx.
 
 ### Step 7: Retry or Exit
