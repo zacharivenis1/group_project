@@ -7,15 +7,17 @@ def get_mortgage_inputs():
     """
     print("Welcome to the Mortgage Calculator!")
 
+    # Loop until a valid loan amount is entered.
     while True:
         try:
             loan_amount = float(input("How much do you want to borrow? (USD): "))
             if loan_amount <= 0:
                 raise ValueError("Loan amount must be greater than 0.")
-            break
+            break  # Exit loop when a valid input is received.
         except ValueError as e:
             print("Please enter a valid loan amount.")
 
+    # Loop until a valid annual income is entered.
     while True:
         try:
             annual_income = float(input("What is your annual income? (USD): "))
@@ -25,6 +27,7 @@ def get_mortgage_inputs():
         except ValueError as e:
             print("Please enter a valid income.")
 
+    # Loop until a valid capital amount is entered.
     while True:
         try:
             capital = float(input("How much capital do you have? (USD): "))
@@ -34,6 +37,7 @@ def get_mortgage_inputs():
         except ValueError as e:
             print("Please enter a valid amount for capital.")
 
+    # Loop until a valid credit score is entered.
     while True:
         try:
             credit_score = int(input("What is your credit score? (300-850): "))
@@ -43,6 +47,7 @@ def get_mortgage_inputs():
         except ValueError as e:
             print("Please enter a valid credit score.")
 
+    # Return the collected inputs as a dictionary.
     return {
         "loan_amount": loan_amount,
         "annual_income": annual_income,
@@ -51,7 +56,7 @@ def get_mortgage_inputs():
     }
 
 
-# Define bank data with constraints
+# Define bank data with constraints such as interest rate, loan-to-income ratio, minimum credit score, and required down payment.
 banks = {
     "Nordea": {
         "base_interest_rate": 6.1,
@@ -86,10 +91,13 @@ def calculate_monthly_payment(loan_amount, annual_rate, years):
     Returns:
         float: The calculated monthly payment.
     """
+    # Convert annual interest rate to a monthly rate.
     monthly_rate = (annual_rate / 100) / 12
     total_months = years * 12
+    # If there's no interest, simply divide the loan amount over the months.
     if monthly_rate == 0:
-        return loan_amount / total_months  # Avoid division by zero
+        return loan_amount / total_months  # Avoid division by zero.
+    # Calculate monthly payment using the annuity formula.
     return loan_amount * (monthly_rate * (1 + monthly_rate) ** total_months) / ((1 + monthly_rate) ** total_months - 1)
 
 
@@ -105,6 +113,7 @@ def check_financial_sustainability(monthly_payment, annual_income):
         str: "✅ Sustainable" if below 30% of income, otherwise "⚠️ Unhealthy Financing".
     """
     monthly_income = annual_income / 12
+    # Determine if the monthly payment is less than 30% of the user's monthly income.
     return "✅ Sustainable" if monthly_payment < 0.3 * monthly_income else "⚠️ Unhealthy Financing"
 
 
@@ -119,6 +128,7 @@ def check_bank_eligibility(user_data, banks):
     Returns:
         tuple: (eligible_banks, alternative_banks) - Banks that approve the request and max possible loan offers.
     """
+    # Extract user data for clarity.
     loan_amount = user_data["loan_amount"]
     annual_income = user_data["annual_income"]
     capital = user_data["capital"]
@@ -127,12 +137,18 @@ def check_bank_eligibility(user_data, banks):
     eligible_banks = {}
     alternative_banks = {}
 
+    # Iterate over each bank and its details.
     for bank, details in banks.items():
+        # Calculate the maximum loan allowed based on income.
         max_loan = details["max_loan_to_income"] * annual_income
+        # Calculate the required down payment for the desired loan amount.
         required_down_payment = details["down_payment"] * loan_amount
+        # Calculate the down payment for the maximum possible loan.
         max_possible_down_payment = details["down_payment"] * max_loan
 
+        # Check if the user's credit score meets the minimum requirement.
         if credit_score >= details["min_credit_score"]:
+            # Check if the user qualifies for the loan with their capital and desired loan amount.
             if loan_amount <= max_loan and capital >= required_down_payment:
                 eligible_banks[bank] = {
                     "base_interest_rate": details["base_interest_rate"],
@@ -141,6 +157,7 @@ def check_bank_eligibility(user_data, banks):
                     "loan_options": {}
                 }
 
+                # Calculate loan options for different repayment terms.
                 for term in [15, 25, 30]:
                     monthly_payment = calculate_monthly_payment(loan_amount, details["base_interest_rate"], term)
                     sustainability = check_financial_sustainability(monthly_payment, annual_income)
@@ -150,6 +167,7 @@ def check_bank_eligibility(user_data, banks):
                         "sustainability": sustainability
                     }
 
+            # If user doesn't qualify for the desired amount, check if they qualify for a maximum loan offer.
             elif capital >= max_possible_down_payment:
                 alternative_banks[bank] = {
                     "base_interest_rate": details["base_interest_rate"],
@@ -158,6 +176,7 @@ def check_bank_eligibility(user_data, banks):
                     "loan_options": {}
                 }
 
+                # Calculate loan options based on the maximum loan possible.
                 for term in [15, 25, 30]:
                     monthly_payment = calculate_monthly_payment(max_loan, details["base_interest_rate"], term)
                     sustainability = check_financial_sustainability(monthly_payment, annual_income)
@@ -167,4 +186,5 @@ def check_bank_eligibility(user_data, banks):
                         "sustainability": sustainability
                     }
 
+    # Return banks where the user is eligible and alternative offers if available.
     return eligible_banks, alternative_banks
