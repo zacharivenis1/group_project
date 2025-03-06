@@ -33,7 +33,7 @@ The Mortgage Calculator Application is a Python-based tool designed to help user
 
 - openpyxl: For Excel file operations.
 
-- ktinter: For creting makeshist application from Python terminal without the need to compile. (on pycharm download the futures module for simplicity)
+- ktinter: For creating makeshist application from Python terminal without the need to compile. (on pycharm download the futures module for simplicity)
 
 
 ## You can install the required libraries using the following command:
