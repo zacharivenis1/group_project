@@ -50,6 +50,7 @@ def analyze_eligibility(loan_amount, annual_income, capital, credit_score):
 
     eligible_banks = []
     ineligible_reasons = {}
+    alternative_options = []
 
     for _, row in df.iterrows():
         reasons = []
@@ -65,6 +66,12 @@ def analyze_eligibility(loan_amount, annual_income, capital, credit_score):
 
         if capital < required_down_payment:
             reasons.append(f"Insufficient capital: Need ${required_down_payment:,.2f}, but have ${capital:,.2f}.")
+            alternative_loan_amount = (capital / (row["Down Payment (%)"] / 100))
+
+            if credit_score >= min_credit_score:
+                alternative_options.append(
+                    f"🏦 {row['Bank Name']}\n  - Alternative Loan Amount: ${alternative_loan_amount:,.2f}\n  - Interest Rate: {row['Base Interest Rate']}%\n  - Required Down Payment: ${capital:,.2f} (based on available capital)\n"
+                )
 
         if not reasons:
             loan_terms = [15, 25, 30]
@@ -83,6 +90,9 @@ def analyze_eligibility(loan_amount, annual_income, capital, credit_score):
 
     if eligible_banks:
         return "✅ You qualify for loans from the following banks:\n" + "\n".join(eligible_banks)
+    elif alternative_options:
+        return "❌ You do not qualify for your requested loan amount, but here is an alternative option that fits your inputs:\n" + "\n".join(
+            alternative_options)
     else:
         return "❌ You do not qualify for any loan at this time.\n\nReasons:\n" + "\n".join(
             [f"🔻 {bank}: \n - " + "\n - ".join(reasons) for bank, reasons in ineligible_reasons.items()]
